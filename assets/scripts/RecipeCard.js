@@ -14,7 +14,7 @@ class RecipeCard extends HTMLElement {
     let article = document.createElement("article");
 
     // A3. TODO - Create a style element - This will hold all of the styles for the Web Component
-    const style = document.createElement("style");
+    let style = document.createElement("style");
 
     // A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
     style.textContent = 
@@ -97,7 +97,9 @@ class RecipeCard extends HTMLElement {
   </style>`
 
     // A5. TODO - Append the <style> and <article> elements to the Shadow DOM
-    this.shadowRoot.append(style, article);
+    this.shadowRoot.appendChild(article);
+    this.shadowRoot.appendChild(style);
+
   }
 
   /**
@@ -126,24 +128,31 @@ class RecipeCard extends HTMLElement {
     if (!data) return;
 
     // A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
-    let article = document.querySelector("article");
-  
+    let article = this.shadowRoot.querySelector('article');
+    
     // A7. TODO - Set the contents of the <article> with the <article> template given in
     //           cardTemplate.html and the data passed in (You should only have one <article>,
     //           do not nest an <art")icle> inside another <article>). You should use Template
     //           literals (tempalte strings) and element.innerHTML for this.
-    article.querySelector('img').src = `${data["imgSrc"]}`;
-    article.querySelector('img').alt = `${data["imgAlt"]}`;
+    article.innerHTML =  
 
-    article.querySelector("a[href]").innerHTML = `${data["titleLnk"]}`;
-    article.querySelector("a[href]").innerHTML = `${data["titleTxt"]}`;
+      `<p class="title">
+        <a href= ${data["titleLnk"]}>${data.titleTxt}</a>
+      </p>
 
-    article.querySelector(".organization").src = `${data["organization"]}`;
-    article.querySelector(".rating").src = `${data["rating"]}`;
-    article.querySelector("span").innerHTML = `${data["numRatings"]}`;
+      <p class="organization">${data["organization"]}</p>
+      <div class="rating">
+        <span>${data["rating"]}</span>
+        <img src= ${data["imgSrc"]} alt=${data["imgAlt"]}>
+        <span>(${data["numRatings"]})</span>
+      </div>
 
-    article.querySelector("time").innerHTML = `${data["time"]}`;
-    article.querySelector(".ingredients").innerHTML = `${data["ingredients"]}`;
+      <time>${data["lengthTime"]} min</time>
+      <p class="ingredients">
+      ${data["ingredients"]}
+      </p>
+      `
+      
 
   }
 } 
