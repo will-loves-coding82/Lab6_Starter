@@ -137,7 +137,7 @@ class RecipeCard extends HTMLElement {
     article.innerHTML =  
 
       `<p class="title">
-        <a href= ${data["titleLnk"]}>${data.titleTxt}</a>
+        <a href= ${data["titleLnk"]}>${data["titleTxt"]}</a>
       </p>
 
       <p class="organization">${data["organization"]}</p>
