@@ -25,6 +25,9 @@ function getRecipesFromStorage() {
   //           header. It is possible in only a single line, but should
   //           be no more than a few lines.
   
+   /* Local storage stores data as a string so we call .parse()
+    * to convert the string into an object. O
+    */
    let arr = JSON.parse(localStorage.getItem("recipes"|| "[]"));
    return arr;
 
@@ -41,7 +44,6 @@ function getRecipesFromStorage() {
 function addRecipesToDocument(recipes) {
 
   // A10. TODO - Get a reference to the <main> element
-
   let main = document.getElementsByTagName('main')[0];
   // A11. TODO - Loop through each of the recipes in the passed in array,
   //            create a <recipe-card> element for each one, and populate
@@ -80,7 +82,7 @@ function initFormHandler() {
   //            submit button is clicked
   document.querySelector('form').addEventListener("submit", (event) => {
     
-    console.log("clicked submit")
+    //console.log("clicked submit")
     // Steps B4-B9 will occur inside the event listener from step B3
     event.preventDefault();
 
@@ -91,14 +93,15 @@ function initFormHandler() {
     //            make this easier to read), and then extract the keys and corresponding
     //            values from the FormData object and insert them into recipeObject
     let recipeObject = new Object();
+
+    // grab each pair (key, value) and create these pairs in the object
     for (const [key, value] of formData.entries()) {
       recipeObject[key]= value;
-      console.log(key, value);
+      //console.log(key, value);
       
   }
 
-  console.log(recipeObject)
-    //recipeObject =  [...formData.entries()];
+    //console.log(recipeObject)
 
     // B6. TODO - Create a new <recipe-card> element
     let newRecipeCard = document.createElement('new-recipe');
@@ -113,11 +116,9 @@ function initFormHandler() {
 
   // B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
   //            then save the recipes array back to localStorage
-
   let recipeArray =  [];
   recipeArray = JSON.parse(localStorage.getItem("recipes"|| "[]"));
   recipeArray.push(recipeObject);
-
   localStorage.setItem('recipes', JSON.stringify(recipeArray));
 
 
