@@ -17,9 +17,8 @@ class RecipeCard extends HTMLElement {
     let style = document.createElement("style");
 
     // A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
-    style.textContent = 
-      `<style>
-    * {
+    style.textContent= 
+    `* {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -93,13 +92,10 @@ class RecipeCard extends HTMLElement {
     time {
       color: #70757A;
       font-size: 12px;
-    }
-  </style>`
+    }`;
 
     // A5. TODO - Append the <style> and <article> elements to the Shadow DOM
-    this.shadowRoot.appendChild(article);
-    this.shadowRoot.appendChild(style);
-
+    this.shadowRoot.append(article, style);
   }
 
   /**
@@ -136,22 +132,20 @@ class RecipeCard extends HTMLElement {
     //           literals (tempalte strings) and element.innerHTML for this.
     article.innerHTML =  
 
-      `<p class="title">
-        <a href= ${data["titleLnk"]}>${data["titleTxt"]}</a>
-      </p>
-
-      <p class="organization">${data["organization"]}</p>
-      <div class="rating">
-        <span>${data["rating"]}</span>
-        <img src= ${data["imgSrc"]} alt=${data["imgAlt"]}>
-        <span>(${data["numRatings"]})</span>
-      </div>
-
-      <time>${data["lengthTime"]} min</time>
-      <p class="ingredients">
-      ${data["ingredients"]}
-      </p>
       `
+        <img src=${data["imgSrc"]} alt=${data["imgAlt"]}>
+        <p class="title">
+          <a href=${data["titleLnk"]}>${data["titleTxt"]}</a>
+        </p>
+        <p class="organization">${data["organization"]}</p>
+        <div class="rating">
+          <span>${data["rating"]}</span>
+          <img src="assets/images/icons/${data["rating"]}-star.svg" alt="${data["rating"]}stars">
+          <span>(${data["numRatings"]})</span>
+        </div>
+        <time>${data["lengthTime"]}min</time>s
+        <p class="ingredients">${data["ingredients"]}</p>`
+    
       
 
   }
